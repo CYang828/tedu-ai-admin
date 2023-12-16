@@ -30,7 +30,7 @@ export const routes = [
             },
         ]
     },
-    { path: '/', redirect: { name: 'Teaching' } },
+    { path: '/', redirect: { name: 'questionsBank' } },
 
 
 
