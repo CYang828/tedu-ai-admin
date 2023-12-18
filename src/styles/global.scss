@@ -59,30 +59,43 @@ button:focus-visible {
 }
 
 #app {
-  width:100%;
+  width: 100%;
   min-width: 1280px;
   margin: 0 auto;
   background: #e7e7e7;
-  .el-header{
+  .el-header {
     height: 60px;
-    background:#409EFF
+    background: #409eff;
   }
-  .main-container{
-    height:calc(100vh - 60px);
-    .el-aside{
+  .main-container {
+    height: calc(100vh - 60px);
+    .el-aside {
       height: 100%;
       background-color: #fff;
-      margin-right:1rem;
+      margin-right: 1rem;
 
-      .el-menu--vertical{
-        border:0
+      .el-menu--vertical {
+        border: 0;
       }
     }
-    .el-main{
+    .el-main {
       box-sizing: border-box;
-      background-color: #fff;
-      padding:0;
-     
+
+    
+      .breadcrumb-container {
+        padding: 0 1rem;
+        margin-bottom: 1rem;
+        background-color: #fff;
+        height:50px;
+        line-height: 50px;
+        display: flex;
+        align-items: center;
+      }
+      .main-content {
+        padding: 0 1rem;
+        background-color: #fff;
+        height: calc(100% - 50px - 1rem);
+      }
     }
   }
 }

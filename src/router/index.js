@@ -3,21 +3,21 @@ import { createRouter,  createWebHashHistory } from "vue-router";
 export const routes = [
 
     {
-        path: "/questionsBank",
-        name: "questionsBank",
+        path: "/Teaching",
+        name: "questionBank",
         meta: {
             title:"题库管理"
         },
         component: (resolve) => import("@/views/Home.vue", resolve),
         children: [
             {
-                path: "/Teaching",
+                path: "",
                 name: "Teaching",
                 meta: {
                     title: "教学题库",
                 },
                 component: (resolve) =>
-                    import("../views/questionsBank/Teaching.vue",resolve ),
+                    import("@/views/questionsBank/Teaching.vue",resolve ),
             },
             {
                 path: "/AI-Generate",
@@ -30,7 +30,7 @@ export const routes = [
             },
         ]
     },
-    { path: '/', redirect: { name: 'questionsBank' } },
+    { path: '/', redirect: { path: '/Teaching' } },
 
 
 
@@ -43,7 +43,13 @@ const router = createRouter({
 // 路由导航守卫
 router.beforeEach((to, from, next) => {
     // 登录及token处理
-    return next()
+
+    // if (to.path == '/') {
+    //     return next({ path: '/Teaching' })
+    // } else { 
+        return next()
+    // }
+   
 });
 
 export default router

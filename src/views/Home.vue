@@ -9,25 +9,21 @@
           <SideMenu></SideMenu>
         </el-aside>
         <el-main>
-           
-            <div>
-               
-                <el-breadcrumb separator-icon="/">
-           
+          <div class="breadcrumb-container">
+            <el-breadcrumb >
               <el-breadcrumb-item
-              v-for="item in breadList"
+                v-for="item in routers"
                 :key="item.path"
-               
-                >{{ item.meta.title }}</el-breadcrumb-item
+                :to="{ path: item.path }"
               >
-          
-          </el-breadcrumb>
-            </div>
-         
-          <div>
+                {{ item.meta.title }}
+              </el-breadcrumb-item>
+            </el-breadcrumb>
+          </div>
+
+          <div class="main-content">
             <router-view></router-view>
           </div>
-          
         </el-main>
       </el-container>
     </el-container>
@@ -37,52 +33,23 @@
 <script setup>
 import SideMenu from "@/components/Menu.vue";
 import Header from "@/components/Header.vue";
-import { ref, reactive, watch,onMounted } from "vue";
+import { ref, reactive, watch, onMounted, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import { nextTick } from "process";
 
-let breadList = ref([]);
+let breadList = reactive([]);
 // 获取路由器实例
 const router = useRouter();
+console.log("router", router.currentRoute.value.matched);
 
 // route响应式对象
 const route = useRoute();
 
-let getMatched = () => {
-    console.log("route.matched", route.matched);
- 
-//   breadList = route.matched.filter(
-//     (item) => item.meta && item.meta.title
-    //     );
-    // nextTick(() => { 
-        breadList = route.matched
-    // })
-
-    
-    console.log("-matched",route.matched.filter(
-    (item) => item.meta && item.meta.title
-    ));
-};
-onMounted(() => {
-    getMatched();
-  console.log(breadList,route.matched)
+const routers = computed(() => {
+  // 过滤掉没有meta的
+  return router.currentRoute.value.matched.filter((item) => item.meta.title);
 });
-
-watch(
-  () => route,
-  (newValue, oldValue) => {
-    //监听路由路径是否发生变化，之后更改面包屑
-    // breadList = route.matched.filter(
-    //   (item) => item.meta && item.meta.title
-      //   );
-      nextTick(() => { 
-          breadList = newValue.matched;
-      })
-    // breadList = route.matched
-    console.log(breadList)
-  }
-);
 </script>
 
 <style lang="scss" scoped>
+
 </style>

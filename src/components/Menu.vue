@@ -3,15 +3,15 @@
     <el-col :span="24">
      
       <el-menu
-        default-active="/Teaching"
+        :default-active="activePath"
         class="el-menu-vertical-demo"
         active-text-color="#409EFF"
-        :router="true"
+        router
         @open="handleOpen"
         @close="handleClose"
         :default-openeds="['1']"
       >
-        <el-sub-menu index="/Teaching">
+        <el-sub-menu index="1">
           <template #title>
             <el-icon><Files /></el-icon>
             <span>题库管理</span>
@@ -34,6 +34,16 @@
 </template>
 
 <script setup>
+import { ref,reactive, watch } from "vue"
+import { useRoute} from "vue-router"
+const route = useRoute()
+let activePath = route.path
+
+watch(route, (value, oldValue) => {
+    console.log(value, oldValue)
+    activePath = value.path
+  })
+
 
 const handleOpen = (key, keyPath) => {
   console.log(key, keyPath);

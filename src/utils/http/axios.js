@@ -4,7 +4,7 @@ import { ElMessage } from 'element-plus'
 
 // 创建axios 实例
 const instance = axios.create({
-    baseURL:"/apis",
+    baseURL:"http://192.168.191.66:10999/",
     timeout:30000
 });
 instance.defaults.headers.post = {

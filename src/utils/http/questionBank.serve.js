@@ -1,17 +1,17 @@
 import request from "./axios";
 
 // 题库管理api
-const apis = {
+const questionsBankApi = {
 //    获取学科列表 /api/v1/subjects/list
-    async subjectsList(data) {
+    async subjectsList() {
       //外审意见
       const result = await request({
-            url: dev + "/api/v1/subjects/list",
+            url: "/api/v1/subjects/list",
             method: "get",
         });
-        return await Promise.resolve(result.data);
+        return  Promise.resolve(result.data);
     },
     
   };
   
-  export default apis;
+  export default questionsBankApi;
