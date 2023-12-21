@@ -9,8 +9,19 @@ const questionsBankApi = {
             url: "/api/v1/subjects/list",
             method: "get",
         });
-        return  Promise.resolve(result.data);
-    },
+        return  Promise.resolve(result);
+  },
+  //    获取知识专题列表树 /api/v1/specialTopics/tree
+  async specialTopicsList(params) {
+    //外审意见
+   
+    const result = await request({
+          url: "/api/v1/specialTopics/tree",
+      method: "get",
+          params
+      });
+      return  Promise.resolve(result.data);
+  },
     
   };
   

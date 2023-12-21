@@ -5,7 +5,10 @@ import { ElMessage } from 'element-plus'
 // 创建axios 实例
 const instance = axios.create({
     baseURL:"http://192.168.191.66:10999/",
-    timeout:30000
+  timeout: 30000,
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
 });
 instance.defaults.headers.post = {
     'Content-Type': 'application/x-www-form-urlencoded'
@@ -43,12 +46,24 @@ const errorHandle = (status, other) => {
 // 添加响应拦截器
 instance.interceptors.response.use(
   // 响应包含以下信息data,status,statusText,headers,config
-  (res) => (res.status === 200 ? Promise.resolve(res) : Promise.reject(res)),
+  (res) => { 
+    if (res.status == 200) {
+      
+      if (res.data.code == 200) {
+       return  Promise.resolve(res.data)
+      } else { 
+        ElMessage.error(res.data.msg || res.data.data)
+        return Promise.resolve(res.data)
+      }
+    } else { 
+     return  Promise.reject(res)
+    }
+  },
   (err) => {
     ElMessage.error(err)
     const { response } = err
     if (response) {
-      errorHandle(response.status, response.data)
+      errorHandle(res.data.code == 200, response.data)
       return Promise.reject(response)
     }
     ElMessage.error('请求失败')

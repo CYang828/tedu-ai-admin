@@ -22,7 +22,7 @@ export default defineConfig({
   base: './', // 打包路径
   server:{
     open:false,
-    port:3000,
+    port:3005,
     proxy:{
       "/apis":{
         target:"http://192.168.191.66:10999",

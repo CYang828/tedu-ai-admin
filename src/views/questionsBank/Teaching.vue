@@ -1,5 +1,6 @@
 <template>
     <Suspense>
+     
         <left-tree></left-tree>
     </Suspense>
         
