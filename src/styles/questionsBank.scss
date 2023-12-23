@@ -1,0 +1,10 @@
+.outer-row{
+    width:100%;height: 100%;
+    .left{
+      width:30%;height: 100%; max-width: 300px;
+      overflow: auto;
+    }
+    .right{
+      width:calc(100% - 300px);box-sizing: border-box; background-color: gainsboro;padding-left:1rem
+    }
+  }
