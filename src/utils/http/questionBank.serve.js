@@ -49,7 +49,48 @@ const questionsBankApi = {
         });
         return Promise.resolve(result.data);
     },
-
+    //   分页顺序获取练习题
+    async questionsPageQuery(params) {
+      for(let key in params){
+        let value = params[key]
+        if(!value){
+          delete params[key]
+        }
+      }
+      const result = await request({
+          url: "/api/v1/questions/pageQuery",
+          method: "get",
+          params
+      });
+      return Promise.resolve(result.data);
+    },
+  // 修改习题
+  async updateExercise(data) {
+    const result = await request({
+        url: "/api/v1/questions/update",
+        method: "POST",
+        data
+    });
+    return Promise.resolve(result.data);
+  },
+  // 修改习题状态
+  async updateStateExercise(data) {
+    const result = await request({
+        url: "/api/v1/questions/updateState",
+        method: "POST",
+        data
+    });
+    return Promise.resolve(result.data);
+  },
+  // 删除习题
+  async deleteExercise(data) {
+    const result = await request({
+        url: "/api/v1/questions/delete",
+        method: "POST",
+        data
+    });
+    return Promise.resolve(result.data);
+  },
 };
 
 export default questionsBankApi;

@@ -1,5 +1,5 @@
 <template>
-  <div class="side-tree">
+  <div class="side-tree" :style="{width:!isCollapse ? '300px' : '35px'}">
     <table></table>
     <el-icon @click="isCollapse = !isCollapse" size="20">
       <Fold v-if="isCollapse" />
@@ -47,9 +47,9 @@
 </template>
   
   <script  setup>
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted,defineEmits } from "vue";
 import questionsBankApi from "@/utils/http/questionBank.serve.js";
-
+const emits = defineEmits(['treeNodeClick']);
 const subjectTree = ref();
 const treeProps = {
   label: "name",
@@ -68,8 +68,8 @@ let expendKeys = reactive([]);
 let subjectList = ref([]);
 // 下拉菜单绑定内容
 let searchSubject = ref("");
+let ids = ref([])
 const selectSubject = (val) => {
- 
   let node = subjectTree.value.getNode(val);
   //  设置未进行懒加载状态
   node.loaded = false;
@@ -90,6 +90,7 @@ const loadNode = async (node, resolve) => {
       item.children = [];
       item.name = item.subjectName;
       item.leaf = false;
+      item.id = item.subjectId
       return item;
     });
 
@@ -115,14 +116,31 @@ const loadNode = async (node, resolve) => {
   }
 };
 const nodeClick = (data) => {
-  console.log("被输出值{ data }的输出结果是：", data);
+  // console.log("被输出值{ data }的输出结果是：", data);
+  let parentIds = findParentNodes(data)
+  ids.value = [data.id].concat(parentIds)
+  emits('treeNodeClick',ids.value)
 };
+const findParentNodes = (nodeData) => {
+  const parentNodes = [];
+  let treeref = subjectTree.value
+ 
+  const findParent = (node) => {
+    let pid = treeref.getNode(node).parent.data.id || 0;
+    if (pid !== 0) {
+      parentNodes.push(pid);
+      findParent(treeref.getNode(node).parent.data);
+    }
+  };
+  findParent(nodeData);
+  return parentNodes;
+}
 </script>
   <style lang="scss"  scoped>
 .side-tree {
   padding: 1rem 0;
   background-color: #fff;
-
+  transition: width 0.2s ease-in-out;
   height: 100%;
   box-sizing: border-box;
 

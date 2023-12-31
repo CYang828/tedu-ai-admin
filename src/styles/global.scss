@@ -80,7 +80,7 @@ button:focus-visible {
     }
     .el-main {
       box-sizing: border-box;
-
+      // min-width: 1664px;
     
       .breadcrumb-container {
         padding: 0 1rem;
@@ -98,6 +98,13 @@ button:focus-visible {
       }
     }
   }
+}
+
+.el-dialog__header{
+  background: rgba(215, 215, 215, 1);
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
+  margin-right: 0px !important;
 }
 
 @media (prefers-color-scheme: light) {
