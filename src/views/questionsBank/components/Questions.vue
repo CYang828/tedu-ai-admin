@@ -33,7 +33,7 @@
       <el-col :span="6" class="right-action">
         <div>
           <el-button type="success" size="large">导出题库</el-button>
-          <el-button v-if="$route.path == '/AI-Generate'" type="primary" size="large">生成题目</el-button>
+          <el-button v-if="$route.path == '/AI-Generate'" type="primary" size="large" @click="generatingProblem">生成题目</el-button>
         </div>
         <div>
           <el-button size="large">重置</el-button>
@@ -44,6 +44,7 @@
     <div class="question-content">
       <exercises @updateList="updateListFn"></exercises>
     </div>
+    <aiGenerateModel v-model:dialogVisible="dialogVisible" v-if="dialogVisible"></aiGenerateModel>
   </div>
 </template>
 
@@ -51,6 +52,8 @@
 import { ref, reactive, defineProps, defineEmits } from "vue";
 import questionsBankApi from "@/utils/http/questionBank.serve.js";
 import exercises from "@/components/exercises/index.vue"
+import aiGenerateModel from "@/components/exercises/aiGenerateModel.vue"
+const dialogVisible = ref(false)
 const emits = defineEmits(['updateList']);
 const searchForm = reactive({
   // 习题编号，关键字，类型，难度，状态
@@ -64,7 +67,10 @@ const searchForm = reactive({
   size: 10
 
 });
-
+// 生成题目
+const generatingProblem = ()=>{
+  dialogVisible.value = true
+}
 const onSubmit = () => {
   console.log("submit!");
 };

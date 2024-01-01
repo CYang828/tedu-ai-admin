@@ -276,14 +276,14 @@ onMounted(()=>{
 <style lang="scss" scoped>
 .RadioZHM {
   margin-bottom: 20px;
-  // border: 1px solid rgba(220, 223, 230, 1);
-
-  // min-width: 1190px;
+  box-shadow:  0 1px 2px 0 rgba(199,199,199,0.16), 0 2px 6px 2px rgba(60,64,67,0.15);
+  border-radius: 6px;
+  overflow: hidden;
   .title-box {
     background: #D7D7D7;
     display: flex;
     padding: 5px 20px;
-    border: 1px solid #333;
+    border: 1px solid rgba(220, 223, 230, 1);
     line-height: 35px;
     .title {
       min-width: 64px;
@@ -314,9 +314,9 @@ onMounted(()=>{
     background: #D7D7D7;
     display: flex;
     padding: 5px 20px;
-    border-left: 1px solid #333;
-    border-right: 1px solid #333;
-    border-bottom: 1px solid #333;
+    border-left: 1px solid rgba(220, 223, 230, 1);
+    border-right: 1px solid rgba(220, 223, 230, 1);
+    border-bottom: 1px solid rgba(220, 223, 230, 1);
     line-height: 35px;
     >div{
       width: 31%;

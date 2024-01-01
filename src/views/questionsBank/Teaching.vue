@@ -35,9 +35,8 @@
 </template>
 
 <script setup>
-import { ref, provide, computed, watch } from "vue";
+import { ref, provide, computed, watch, defineAsyncComponent } from "vue";
 import "@/styles/questionsBank.scss";
-import { defineAsyncComponent } from "vue";
 import QuestionsContent from "./components/Questions.vue"
 import questionsBankApi from "@/utils/http/questionBank.serve.js";
 provide('dataList', computed(() => {

@@ -17,7 +17,7 @@ export const routes = [
                     title: "教学题库",
                 },
                 component: (resolve) =>
-                    import("@/views/questionsBank/Teaching.vue",resolve ),
+                  import("@/views/questionsBank/Teaching.vue",resolve ),
             },
             {
                 path: "/AI-Generate",
@@ -26,7 +26,7 @@ export const routes = [
                     title: "AI生成题库",
                 },
                 component: (resolve) =>
-                    import("@/views/questionsBank/AI-Generate.vue", resolve),
+                  import("@/views/questionsBank/Teaching.vue",resolve ),
             },
         ]
     },

@@ -91,6 +91,15 @@ const questionsBankApi = {
     });
     return Promise.resolve(result.data);
   },
+  // ai生成题目
+  async aiGenerate(params){
+    const result = await request({
+      url: "/api/v1/questions/aiGenerate",
+      method: "get",
+      params
+    })
+    return Promise.resolve(result.data);
+  } 
 };
 
 export default questionsBankApi;
